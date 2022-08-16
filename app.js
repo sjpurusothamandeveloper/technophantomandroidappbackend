@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const cors = require("cors");
 const port = process.env.PORT || 5050;
 const bodyParser = require('body-parser');
 const hostname = '0.0.0.0';
 require('dotenv/config');
-
+app.use(cors({origin: new URL('http://localhost:3000'), credentials: true}))
 app.use(bodyParser.json());
 
 //Import Routes
