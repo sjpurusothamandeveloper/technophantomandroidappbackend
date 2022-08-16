@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
     res.send('We are on home')
 })
 
+app.get('/testme', (req, res) => {
+    res.send('We are on home')
+})
+
 //Connect To DB
 mongoose.connect(
     process.env.DB_CONNECTION,
