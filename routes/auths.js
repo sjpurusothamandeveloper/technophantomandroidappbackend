@@ -16,6 +16,7 @@ router.use(function (req, res, next) {
 });
 
 router.post('/signin', async (req, res) => {
+  req.setTimeout(50000)
   try {
     console.log("Req", req.body)
     const getUserByCred = await AddTechnoPhantomUser.findOne({ email: req.body.email });

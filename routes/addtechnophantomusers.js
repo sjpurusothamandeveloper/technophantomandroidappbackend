@@ -16,6 +16,7 @@ router.use(function (req, res, next) {
 });
 
 router.post('/technophantom-signup', async (req, res) => {
+    req.setTimeout(50000)
     const addNewFitsyUser = new AddFitsyUser({
         name: req.body.name,
         userName: req.body.userName,
@@ -36,6 +37,7 @@ router.post('/technophantom-signup', async (req, res) => {
 })
 
 router.post('/technophantom-userlist', async (req, res) => {
+    req.setTimeout(50000)
     try {
         const getUserList = await AddFitsyUser.find();
         res.json({
