@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/testme', (req, res) => {
+    req.setTimeout(50000)
     res.send('We are on home')
 })
 
@@ -28,7 +29,6 @@ mongoose.connect(
     process.env.DB_CONNECTION,
     { useUnifiedTopology: true, useNewUrlParser: true },
     () => console.log('Connected to DB!'))
-
 app.listen(port, hostname, () => {
     console.log(`Server listening on the port::${port}`)
 });
