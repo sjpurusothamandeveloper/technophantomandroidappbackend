@@ -6,8 +6,10 @@ const port = process.env.PORT || 5050;
 const bodyParser = require('body-parser');
 const hostname = '0.0.0.0';
 require('dotenv/config');
-app.use(cors({origin: new URL('http://localhost:3000'), credentials: true}))
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors({origin: new URL('http://localhost:3000'), credentials: true}))
+
 
 //Import Routes
 const authRoute = require('./routes/auths');
