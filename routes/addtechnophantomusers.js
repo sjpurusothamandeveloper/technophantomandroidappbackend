@@ -37,6 +37,28 @@ router.post('/technophantom-signup', async (req, res) => {
     }
 })
 
+router.get('/technophantom-dummysignup', async (req, res) => {
+    console.log("#####", req.body)
+    // req.setTimeout(50000)
+    const addNewFitsyUser = new AddFitsyUser({
+        // name: req.body.name,
+        userName: req.body.userName,
+        email: req.body.email,
+        password: req.body.password
+    })
+
+    try {
+        const savedFitsyUser = await addNewFitsyUser.save();
+        res.json({
+            statuscode: 200,
+            bodymsg: "Saved Successfully",
+            dbresp: savedFitsyUser
+        });
+    } catch (err) {
+        res.json({ message: err });
+    }
+})
+
 router.post('/technophantom-userlist', async (req, res) => {
     // req.setTimeout(50000)
     try {
