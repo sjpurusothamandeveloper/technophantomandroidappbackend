@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const AddFitsyUser = require('../models/AddTechnoPhantomUser');
+const AddFitsyUser = require('../models/AddFitsyUser');
 var cors = require('cors');
 var corsOptions = {
-    // origin: '0.0.0.0',
+    origin: 'http://localhost:3000',
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200,
 };
@@ -15,12 +15,9 @@ router.use(function (req, res, next) {
     next();
 });
 
-router.post('/technophantom-signup', async (req, res) => {
-    console.log("#####", req.body)
-    // req.setTimeout(50000)
+router.post('/fitsy-signup', async (req, res) => {
     const addNewFitsyUser = new AddFitsyUser({
-        // name: req.body.name,
-        userName: req.body.userName,
+        name: req.body.name,
         email: req.body.email,
         password: req.body.password
     })
@@ -37,8 +34,7 @@ router.post('/technophantom-signup', async (req, res) => {
     }
 })
 
-router.post('/technophantom-userlist', async (req, res) => {
-    // req.setTimeout(50000)
+router.post('/fitsy-userlist', async (req, res) => {
     try {
         const getUserList = await AddFitsyUser.find();
         res.json({
