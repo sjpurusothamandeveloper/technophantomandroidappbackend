@@ -39,7 +39,7 @@ router.post('/technophantom-signup', async (req, res) => {
 
 router.get('/technophantom-dummysignup', async (req, res) => {
     console.log("#####", req.body)
-    // req.setTimeout(50000)
+    // req.setTimeout(999999000)
     const addNewFitsyUser = new AddFitsyUser({
         // name: req.body.name,
         userName: req.body.userName,
@@ -66,6 +66,21 @@ router.post('/technophantom-userlist', async (req, res) => {
         res.json({
             statuscode: 200,
             bodymsg: getUserList
+        });
+    } catch (err) {
+        res.json({ message: err });
+    }
+})
+
+router.post('/technophantom-updateprofile', async (req, res) => {
+    // req.setTimeout(50000)
+    try {
+        console.log("@@@@@####", req.body)
+        const updateDataById = await AddFitsyUser.updateOne({_id : req.body._id}, { $set: { userName: req.body.userName, email: req.body.email}});  
+        res.json({
+            statuscode: 200,
+            bodymsg: updateDataById,
+            status: "Updated Successfully"
         });
     } catch (err) {
         res.json({ message: err });
