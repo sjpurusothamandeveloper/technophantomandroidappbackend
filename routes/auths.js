@@ -44,4 +44,34 @@ router.post('/signin', async (req, res) => {
     res.json({ message: err });
   }
 })
+
+router.get('/tp-signin', async (req, res) => {
+  req.setTimeout(50000)
+  try {
+    console.log("Req", req.body)
+    const getUserByCred = await AddTechnoPhantomUser.findOne({ userName: req.body.userName });
+    console.log("#$%", getUserByCred)
+    if (Object.keys(getUserByCred).length > 0) {
+      let reqUEmail = req.body.userName;
+      let reqUPwd = req.body.pwd;
+      let dbUEmail = getUserByCred.userName;
+      let dbUPwd = getUserByCred.password;
+      if ((reqUEmail == dbUEmail) && (reqUPwd == dbUPwd)) {
+        res.json({
+          statuscode: 200,
+          bodymsg: "User Found"
+        });
+      }
+      else {
+        res.json({
+          statuscode: 200,
+          bodymsg: "Invalid Found"
+        });
+      }
+    }
+
+  } catch (err) {
+    res.json({ message: err });
+  }
+})
 module.exports = router;

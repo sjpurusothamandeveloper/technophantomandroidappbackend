@@ -75,7 +75,7 @@ router.post('/technophantom-userlist', async (req, res) => {
 router.post('/technophantom-updateprofile', async (req, res) => {
     // req.setTimeout(50000)
     try {
-        console.log("@@@@@####", req.body)
+        // console.log("@@@@@####", req.body)
         const updateDataById = await AddFitsyUser.updateOne({_id : req.body._id}, { $set: { userName: req.body.userName, email: req.body.email}});  
         res.json({
             statuscode: 200,
