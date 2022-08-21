@@ -29,7 +29,7 @@ router.post('/technophantom-signup', async (req, res) => {
         const savedFitsyUser = await addNewFitsyUser.save();
         res.json({
             statuscode: 200,
-            message: "Saved Successfully",
+            message: "Saved Successfully, now go to Login screen",
             dbresp: savedFitsyUser
         });
     console.log("##### savedFitsyUser", savedFitsyUser)
@@ -78,8 +78,7 @@ router.post('/technophantom-updateprofile', async (req, res) => {
     // req.setTimeout(50000)
     try {
         console.log('updateprofile req.body', req.body)
-        const updateDataById = await AddFitsyUser.updateOne({_id : req.body.id}, { $set: { userName: req.body.userName, email: req.body.email}});  
-        console.log('updateprofile updateDataById', updateDataById)
+        await AddFitsyUser.updateOne({_id : req.body.id}, { $set: { userName: req.body.userName, email: req.body.email}});  
         res.json({
             statuscode: 200,
             bodymsg:{
