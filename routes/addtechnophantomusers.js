@@ -143,11 +143,11 @@ router.post('/technophantom-user-signIn', async (req, res) => {
 
         console.log(userObj, 'userObj')
         if (!userObj){
-           return res.status(200).json({msg: "Not Found"})
+           return res.status(200).json({message: "User Not Found"})
         }
 
         if (userObj.password !== req.body.password){
-            return res.status(200).json({msg: "Invalid user credentials"})
+            return res.status(200).json({message: "Invalid user credentials"})
          }
 
 
