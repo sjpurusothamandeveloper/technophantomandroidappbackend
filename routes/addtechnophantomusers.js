@@ -29,7 +29,7 @@ router.post('/technophantom-signup', async (req, res) => {
         const savedFitsyUser = await addNewFitsyUser.save();
         res.json({
             statuscode: 200,
-            message: "Saved Successfully, now go to Login screen",
+            message: "Registered Successfully, now go to Login screen",
             dbresp: savedFitsyUser
         });
     console.log("##### savedFitsyUser", savedFitsyUser)
@@ -84,7 +84,7 @@ router.post('/technophantom-updateprofile', async (req, res) => {
             bodymsg:{
                 id: req.body.id
             },
-            message: "Updated Successfully"
+            message: "Profile Updated"
         });
     } catch (err) {
         res.json({ message: err });
@@ -111,7 +111,7 @@ router.put('/technophantom-updateWorkoutdetails', async (req, res) => {
             bodymsg:{
             id: req.body.id
             },
-            message: "Updated Successfully"})
+            message: "Workout Hours Updated"})
 
     } catch (err) {
         res.json({ message: err });
@@ -129,7 +129,7 @@ router.post('/technophantom-getUserDetails', async (req, res) => {
 
         let updatedUserObj = await AddFitsyUser.findById({_id : req.body.id})
 
-        res.status(200).json({ usedDetails: updatedUserObj, message: "Updated Successfully"})
+        res.status(200).json({ usedDetails: updatedUserObj})
 
     } catch (err) {
         res.json({ message: err });
