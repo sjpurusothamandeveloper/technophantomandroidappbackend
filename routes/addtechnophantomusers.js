@@ -29,7 +29,7 @@ router.post('/technophantom-signup', async (req, res) => {
         const savedFitsyUser = await addNewFitsyUser.save();
         res.json({
             statuscode: 200,
-            bodymsg: "Saved Successfully",
+            message: "Saved Successfully",
             dbresp: savedFitsyUser
         });
     console.log("##### savedFitsyUser", savedFitsyUser)
@@ -85,7 +85,7 @@ router.post('/technophantom-updateprofile', async (req, res) => {
             bodymsg:{
                 id: req.body.id
             },
-            status: "Updated Successfully"
+            message: "Updated Successfully"
         });
     } catch (err) {
         res.json({ message: err });
@@ -100,7 +100,7 @@ router.put('/technophantom-updateWorkoutdetails', async (req, res) => {
         console.log(userObj, 'userObj')
 
         if (!userObj){
-           res.status(404).json({msg: "Not Found"})
+           return res.status(404).json({message: "Not Found"})
         }
         const dbVal = Number(userObj.totalWorkingHrs) ? Number(userObj.totalWorkingHrs) : 0 ;
         let workingHrs = dbVal + Number(req.body.totalWorkingHrs);
@@ -112,7 +112,7 @@ router.put('/technophantom-updateWorkoutdetails', async (req, res) => {
             bodymsg:{
             id: req.body.id
             },
-            status: "Updated Successfully"})
+            message: "Updated Successfully"})
 
     } catch (err) {
         res.json({ message: err });
@@ -130,7 +130,7 @@ router.post('/technophantom-getUserDetails', async (req, res) => {
 
         let updatedUserObj = await AddFitsyUser.findById({_id : req.body.id})
 
-        res.status(200).json({ usedDetails: updatedUserObj, status: "Updated Successfully"})
+        res.status(200).json({ usedDetails: updatedUserObj, message: "Updated Successfully"})
 
     } catch (err) {
         res.json({ message: err });
@@ -152,7 +152,7 @@ router.post('/technophantom-user-signIn', async (req, res) => {
          }
 
 
-        res.status(200).json({ usedDetails: userObj, status: "Signed In Successfully"})
+        res.status(200).json({ usedDetails: userObj, message: "Signed In Successfully"})
 
     } catch (err) {
         res.status(404).json({ message: err });
