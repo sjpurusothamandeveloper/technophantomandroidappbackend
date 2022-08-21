@@ -87,4 +87,65 @@ router.post('/technophantom-updateprofile', async (req, res) => {
     }
 })
 
+router.put('/technophantom-updateWorkoutdetails', async (req, res) => {
+    try {
+        const userObj = await AddFitsyUser.findById({_id : req.body.id})
+
+        //  const    totalHrs = req.body.totalHrs
+
+        if (!userObj){
+           res.status(404).json({msg: "Not Found"})
+        }
+        const dbVal = Number(userObj.totalWorkingHrs) ? Number(userObj.totalWorkingHrs) : 0 ;
+        let workingHrs = dbVal + Number(req.body.totalWorkingHrs);
+
+        await AddFitsyUser.updateOne({_id : req.body.id}, { $set: { totalWorkingHrs: workingHrs.toString()}}); 
+        const updatedUserObj = await AddFitsyUser.findById({_id : req.body.id})
+
+        res.status(200).json({ bodymsg: updatedUserObj, status: "Updated Successfully"})
+
+    } catch (err) {
+        res.json({ message: err });
+    }
+})
+
+router.post('/technophantom-getUserDetails', async (req, res) => {
+    try {
+        const userObj = await AddFitsyUser.findById({_id : req.body.id})
+
+
+        if (!userObj){
+           res.status(404).json({msg: "Not Found"})
+        }
+
+        let updatedUserObj = await AddFitsyUser.findById({_id : req.body.id})
+
+        res.status(200).json({ usedDetails: updatedUserObj, status: "Updated Successfully"})
+
+    } catch (err) {
+        res.json({ message: err });
+    }
+})
+
+router.post('/technophantom-user-signIn', async (req, res) => {
+    try {
+
+        let userObj = await AddFitsyUser.findOne({ userName : req.body.userName})
+
+        if (!userObj){
+           res.status(404).json({msg: "Not Found"})
+        }
+
+        if (userObj.password !== req.body.password){
+            res.status(404).json({msg: "Invalid user credentials"})
+         }
+
+
+        res.status(200).json({ usedDetails: userObj, status: "Signed In Successfully"})
+
+    } catch (err) {
+        res.json({ message: err });
+    }
+})
+
 module.exports = router;
